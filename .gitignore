@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.p12
+*.mobileprovision
+*.p8
+*.ipa
+*.xcarchive/
+Config/Signing.xcconfig
