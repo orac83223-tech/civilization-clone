@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { applyCommand } from '../src/game';
 import { RULES } from '../src/game/data/balance';
 import { capitals, command } from './support/fixtures';
+import { validateSave } from '../src/storage/saves';
 
 function contacted() {
   const state = capitals();
@@ -59,5 +60,16 @@ describe('diplomacy and policy legality', () => {
     state = command(state, { type: 'SET_POLICY', policy: 'cultivation' });
     expect(state.factions[0]!.policy).toBe('cultivation');
     expect(state.factions[0]!.gold).toBe(gold - RULES.policySwapCost);
+  });
+  it('keeps repeated diplomacy opinions within the persistable range', () => {
+    let state = contacted();
+    state.relations.find(relation => relation.a === 0 && relation.b === 1)!.opinion = 990;
+    state = command(state, { type: 'GOLD_TRADE', target: 1, give: 100, receive: 0 });
+    expect(state.relations.find(relation => relation.a === 0 && relation.b === 1)!.opinion).toBe(1000);
+    expect(() => validateSave(state)).not.toThrow();
+    state.relations.find(relation => relation.a === 0 && relation.b === 1)!.opinion = -990;
+    state = command(state, { type: 'DECLARE_WAR', target: 1, confirmed: true });
+    expect(state.relations.find(relation => relation.a === 0 && relation.b === 1)!.opinion).toBe(-1000);
+    expect(() => validateSave(state)).not.toThrow();
   });
 });

@@ -4,6 +4,10 @@
 
 **배포 상태:** 2026-09-14 GitHub Pages 활성화 요청이 HTTP 422 `Your current plan does not support GitHub Pages for this repository.`로 거절되었습니다. 저장소는 비공개를 유지하며 실제 공개 플레이 URL은 아직 없습니다. [배포 기록](DEPLOYMENT.md)과 [실행 검증 보고서](TEST_REPORT.md)를 참고하세요.
 
+[구현 PR #1](https://github.com/orac83223-tech/civilization-clone/pull/1) · [CI 실행 기록](https://github.com/orac83223-tech/civilization-clone/actions/workflows/ci.yml)
+
+![실제 게임 화면](artifacts/screenshots/chromium-desktop-empire-round-4.png)
+
 ## 실행 및 다른 환경에서 이어 개발
 
 ```sh
@@ -68,3 +72,5 @@ npm run preview
 UI와 AI는 `applyCommand(state, actorId, command)`를 사용합니다. 불법 명령은 원본 상태를 보존하고 오류를 반환합니다. 엔진에는 DOM·React·Canvas·네트워크가 없습니다. 규칙 난수는 저장 가능한 xorshift 상태를 사용하며 시간·렌더 프레임에 의존하지 않습니다.
 
 P1 백로그: 문화 승리, 불가사의, 해군. P0에 계정·멀티플레이·종교·광고·결제·PWA는 포함하지 않습니다. 30~60분은 설계 목표이며 실제 측정된 플레이 시간으로 홍보하지 않습니다.
+
+검증 한계: 자동 AI 대전 20판은 모두 과학 승리였습니다. 실제 전쟁·점령은 발생하지만 승리 경로 다양성과 사람의 플레이 재미는 추가 밸런스 검증 대상입니다. 휴대전화 실기기 조작·발열·실제 저장 공간 소진은 측정하지 않았습니다.

@@ -183,3 +183,65 @@ test('malformed import preserves current game and primary controls fit the viewp
   await expect(dialog).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
 });
+
+test('canvas selection stays accurate after zoom and viewport rotation using pointer or touch', async ({ page, isMobile }, info) => {
+  const state = capitals();
+  state.seed = 'browser-camera';
+  state.units = state.units.filter(unit => unit.owner !== 0);
+  const scout = addUnit(state, 0, 'scout', 24 * 7 + 8);
+  await hydrate(page, state);
+  await page.getByTestId(`unit-${scout.id}`).click();
+  await page.getByRole('button', { name: '지도 확대', exact: true }).click();
+  const zoom = 1.05 * 1.25;
+  for (const step of [1, 2]) {
+    if (step === 2) {
+      await page.setViewportSize(isMobile ? { width: 844, height: 390 } : { width: 1000, height: 700 });
+      await page.getByTestId(`unit-${scout.id}`).click();
+      await page.getByRole('button', { name: '선택 위치로 이동', exact: true }).click();
+    }
+    const canvas = page.getByTestId('map-canvas');
+    await expect(canvas).toBeVisible();
+    const box = (await canvas.boundingBox())!;
+    const position = { x: box.width / 2 + 35 * Math.sqrt(3) * zoom, y: box.width <= 650 ? box.height * .36 : box.height / 2 };
+    if (isMobile) await canvas.tap({ position }); else await canvas.click({ position });
+    await expect(page.getByTestId('execute-action')).toContainText('이곳으로 이동');
+    if (isMobile) await page.getByTestId('execute-action').tap(); else await page.getByTestId('execute-action').click();
+    await expect.poll(async () => (await savedState(page))?.units.find(unit => unit.id === scout.id)?.tile).toBe(scout.tile + step);
+  }
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  await capture(page, info, 'camera-rotated');
+});
+
+test('two-finger pinch zoom preserves accurate subsequent touch movement', async ({ page, browserName, isMobile }, info) => {
+  test.skip(browserName !== 'chromium' || !isMobile, 'CDP multi-touch input is available only in the Chromium mobile project; WebKit has no CDP session.');
+  const state = capitals();
+  state.seed = 'browser-pinch';
+  state.units = state.units.filter(unit => unit.owner !== 0);
+  const scout = addUnit(state, 0, 'scout', 24 * 7 + 8);
+  await hydrate(page, state);
+  await page.getByTestId(`unit-${scout.id}`).tap();
+  const canvas = page.getByTestId('map-canvas');
+  const box = (await canvas.boundingBox())!;
+  const center = { x: box.x + box.width / 2, y: box.y + box.height * .36 };
+  const zoomLabel = page.locator('.map-controls > span');
+  const initialZoom = Number.parseFloat((await zoomLabel.textContent())!);
+  const session = await page.context().newCDPSession(page);
+  const touches = (spread: number) => [
+    { id: 0, x: center.x - spread, y: center.y },
+    { id: 1, x: center.x + spread, y: center.y },
+  ];
+  await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: touches(20) });
+  for (const spread of [30, 45, 60, 80]) await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: touches(spread) });
+  await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  await session.detach();
+  await expect.poll(async () => Number.parseFloat((await zoomLabel.textContent())!)).toBeGreaterThan(initialZoom);
+  expect((await savedState(page))!.commandSeq).toBe(state.commandSeq);
+  await page.getByRole('button', { name: '선택 위치로 이동', exact: true }).tap();
+  const zoom = Number.parseFloat((await zoomLabel.textContent())!) / 100;
+  await canvas.tap({ position: { x: box.width / 2 + 35 * Math.sqrt(3) * zoom, y: box.height * .36 } });
+  await expect(page.getByTestId('execute-action')).toContainText('이곳으로 이동');
+  await page.getByTestId('execute-action').tap();
+  await expect.poll(async () => (await savedState(page))?.units.find(unit => unit.id === scout.id)?.tile).toBe(scout.tile + 1);
+  expect((await savedState(page))!.commandSeq).toBe(state.commandSeq + 1);
+  await capture(page, info, 'pinch-zoom');
+});

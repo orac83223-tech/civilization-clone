@@ -48,6 +48,12 @@ describe('save validation and deterministic restore', () => {
     ['unmet completed prerequisites', (state: ReturnType<typeof createGame>) => { state.factions[0]!.researched = ['synthesis']; }],
     ['unsupported terrain', (state: ReturnType<typeof createGame>) => { (state.tiles[0] as unknown as { terrain: string }).terrain = 'lava'; }],
     ['result without ended phase', (state: ReturnType<typeof createGame>) => { state.result = { winner: 0, type: 'science', round: 1, scores: [0, 1, 2, 3].map(faction => ({ faction, score: 0 })), reason: 'fixture' }; }],
+    ['dead active AI actor', (state: ReturnType<typeof createGame>) => { state.phase = 'ai'; state.actorId = 1; state.factions[1]!.alive = false; }],
+    ['already settled player round', (state: ReturnType<typeof createGame>) => { state.lastSettledRound = state.round; }],
+    ['city memory on unexplored tile', (state: ReturnType<typeof createGame>) => {
+      const tile = state.tiles.find(candidate => !state.factions[1]!.explored.includes(candidate.id))!;
+      state.factions[1]!.cityMemory.ghost = { id: 'ghost', owner: 0, tile: tile.id, name: 'ghost', hp: 100, originalCapitalOf: 0, lastSeen: 1, visible: false };
+    }],
   ] as const)('rejects %s before state can replace the live game', (_, corrupt) => {
     const state = createGame('corrupt');
     corrupt(state);
@@ -131,5 +137,22 @@ describe('IndexedDB ordering, history, slots and failure recovery', () => {
     spy.mockRestore();
     await expect(saveGame(state)).resolves.toBeUndefined();
     expect(await loadGame()).toEqual(state);
+  });
+  it('handles QuotaExceededError without losing the last save or in-memory export', async () => {
+    const original = createGame('quota-recovery');
+    await saveGame(original);
+    const updated = command(original, { type: 'SET_RESEARCH', tech: 'writing' });
+    const put = vi.spyOn(IDBObjectStore.prototype, 'put').mockImplementation(() => {
+      throw new DOMException('The storage quota was exceeded', 'QuotaExceededError');
+    });
+    try {
+      await expect(saveGame(updated)).rejects.toMatchObject({ name: 'QuotaExceededError' });
+      expect(importSave(exportSave(updated))).toEqual(updated);
+    } finally { put.mockRestore(); }
+    expect(await loadGame()).toEqual(original);
+    expect(await loadGame('auto-1')).toBeNull();
+    const continued = command(updated, { type: 'SET_RESEARCH', tech: 'agriculture' });
+    await expect(saveGame(continued)).resolves.toBeUndefined();
+    expect(await loadGame()).toEqual(continued);
   });
 });

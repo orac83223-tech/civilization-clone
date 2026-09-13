@@ -6,6 +6,7 @@ export const ZERO_YIELD: Yield = { food: 0, production: 0, gold: 0, science: 0, 
 export const ECONOMY_BALANCE = { cityCenter: { food: 3, production: 2, gold: 3, science: 2, culture: 1 }, foodPerPopulation: 2, growthBase: 12, growthPerPopulation: 7, populationCap: 30, minimumPopulation: 1, starvationLoss: 1, maximumBankruptcyDisband: 1, territoryBase: 12, territoryPerPopulation: 3, territoryRadius: 3, scienceConversion: .25, resistanceMultiplier: .5, cityRegeneration: 8, startingGold: 30, ruinGold: 12, upgradeGold: 30 };
 export const COMBAT_BALANCE = { cityStrength: 19, wallStrengthMultiplier: 1.3, wallHp: 50, fortifiedDefense: .25, metallurgyMultiplier: 1.15, militaryPolicyMultiplier: 1.1, siegeCityMultiplier: 1.5, damageScale: 30, retaliationScale: 24, minimumDamage: 8, minimumRetaliation: 6, civilianDefense: 6, healthBaseline: .5, captureHpRatio: .4, resistanceRounds: 3, healFriendly: 18, healAway: 10 };
 export const SCORE_WEIGHTS = { city: 30, population: 5, building: 3, technology: 12, cultureDivisor: 5, goldDivisor: 10, capture: 10 };
+export const DIPLOMACY_LIMITS = { opinionMin: -1000, opinionMax: 1000 };
 export interface TerrainData { name: string; color: string; food: number; production: number; gold: number; moveCost: number; defense: number; passable: boolean; }
 export const TERRAINS: Record<Terrain, TerrainData> = {
  grassland: { name: '초원', color: '#80a77a', food: 3, production: 0, gold: 0, moveCost: 1, defense: 0, passable: true },

@@ -7,6 +7,9 @@
 - 기준 저장소: https://github.com/orac83223-tech/civilization-clone
 - 원격 기본 브랜치: `main`, 작업 기반 커밋 `f05a67632fb330df7b351798178ad64c21004a1b`.
 - 작업 브랜치: `codex/game-mvp`.
+- 구현 PR: https://github.com/orac83223-tech/civilization-clone/pull/1
+- 첫 구현 체크포인트: `86656c50bc788edbe884ae330d9e20e6e82ec757`, push 후 원격 SHA 일치를 확인했습니다.
+- 첫 원격 CI [34769049649](https://github.com/orac83223-tech/civilization-clone/actions/runs/34769049649)는 위 커밋에서 **success**. Linux 설치·typecheck·lint·coverage·50지도/20AI·build·Chromium/WebKit 브라우저 15개·하위 경로 검증을 통과했습니다. 후속 수정의 최신 검증은 PR Checks와 최종 보고에서 커밋별로 구분합니다.
 - GitHub API로 **private=true**, push/admin 권한, **has_pages=false**를 확인했습니다.
 - `POST /repos/orac83223-tech/civilization-clone/pages`에 `{"build_type":"workflow"}`를 요청했습니다.
 - 응답 **HTTP 422**: `Your current plan does not support GitHub Pages for this repository.`

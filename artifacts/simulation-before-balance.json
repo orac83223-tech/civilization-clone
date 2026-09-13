@@ -1,0 +1,1689 @@
+{
+  "generatedAt": "2026-09-13T16:29:14.851Z",
+  "environment": {
+    "platform": "win32",
+    "release": "10.0.22631",
+    "arch": "x64",
+    "node": "v24.13.1",
+    "cpu": "AMD Ryzen 5 5600G with Radeon Graphics         ",
+    "logicalCPUs": 12,
+    "memoryGiB": 15.377948760986328
+  },
+  "methodology": "50 fixed map seeds, 20 fixed AI matches; human faction uses identical observed-information AI; audit each faction/settlement boundary; first round JSON restore at each AI phase. combatNotifications counts emitted combat notifications, not a guaranteed attack counter.",
+  "elapsedMs": 78955.7323,
+  "maps": [
+    {
+      "seed": "map-audit-01",
+      "valid": true,
+      "milliseconds": 9.061699999999973,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-02",
+      "valid": true,
+      "milliseconds": 6.0663000000000125,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-03",
+      "valid": true,
+      "milliseconds": 4.51260000000002,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-04",
+      "valid": true,
+      "milliseconds": 3.811800000000005,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-05",
+      "valid": true,
+      "milliseconds": 2.9863000000000284,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-06",
+      "valid": true,
+      "milliseconds": 3.6129000000000246,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-07",
+      "valid": true,
+      "milliseconds": 3.473000000000013,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-08",
+      "valid": true,
+      "milliseconds": 3.991199999999992,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-09",
+      "valid": true,
+      "milliseconds": 2.8149999999999977,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-10",
+      "valid": true,
+      "milliseconds": 2.7434000000000083,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-11",
+      "valid": true,
+      "milliseconds": 2.9420000000000073,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-12",
+      "valid": true,
+      "milliseconds": 3.0142999999999915,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-13",
+      "valid": true,
+      "milliseconds": 3.026900000000012,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-14",
+      "valid": true,
+      "milliseconds": 2.7878000000000043,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-15",
+      "valid": true,
+      "milliseconds": 2.3915000000000077,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-16",
+      "valid": true,
+      "milliseconds": 2.628099999999961,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-17",
+      "valid": true,
+      "milliseconds": 3.0074000000000183,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-18",
+      "valid": true,
+      "milliseconds": 2.5283000000000015,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-19",
+      "valid": true,
+      "milliseconds": 2.626800000000003,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-20",
+      "valid": true,
+      "milliseconds": 3.3584000000000174,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-21",
+      "valid": true,
+      "milliseconds": 2.7825000000000273,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-22",
+      "valid": true,
+      "milliseconds": 2.7304000000000315,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-23",
+      "valid": true,
+      "milliseconds": 3.162899999999979,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-24",
+      "valid": true,
+      "milliseconds": 2.1135000000000446,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-25",
+      "valid": true,
+      "milliseconds": 3.006399999999985,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-26",
+      "valid": true,
+      "milliseconds": 2.6119999999999663,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-27",
+      "valid": true,
+      "milliseconds": 2.256999999999948,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-28",
+      "valid": true,
+      "milliseconds": 2.3751000000000886,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-29",
+      "valid": true,
+      "milliseconds": 2.3355000000000246,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-30",
+      "valid": true,
+      "milliseconds": 2.0872000000000526,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-31",
+      "valid": true,
+      "milliseconds": 2.5352000000000317,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-32",
+      "valid": true,
+      "milliseconds": 2.9021999999999935,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-33",
+      "valid": true,
+      "milliseconds": 2.2783000000000584,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-34",
+      "valid": true,
+      "milliseconds": 2.4136000000000877,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-35",
+      "valid": true,
+      "milliseconds": 2.5118999999999687,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-36",
+      "valid": true,
+      "milliseconds": 2.2076999999999316,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-37",
+      "valid": true,
+      "milliseconds": 2.5549000000000888,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-38",
+      "valid": true,
+      "milliseconds": 2.7423,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-39",
+      "valid": true,
+      "milliseconds": 2.507400000000075,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-40",
+      "valid": true,
+      "milliseconds": 2.713700000000017,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-41",
+      "valid": true,
+      "milliseconds": 2.703800000000001,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-42",
+      "valid": true,
+      "milliseconds": 2.4057999999999993,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-43",
+      "valid": true,
+      "milliseconds": 2.961200000000076,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-44",
+      "valid": true,
+      "milliseconds": 2.875599999999963,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-45",
+      "valid": true,
+      "milliseconds": 2.9559000000000424,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-46",
+      "valid": true,
+      "milliseconds": 2.551300000000083,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-47",
+      "valid": true,
+      "milliseconds": 2.497099999999932,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-48",
+      "valid": true,
+      "milliseconds": 2.065900000000056,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-49",
+      "valid": true,
+      "milliseconds": 2.2882000000000744,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    },
+    {
+      "seed": "map-audit-50",
+      "valid": true,
+      "milliseconds": 2.306699999999978,
+      "starts": [
+        75,
+        92,
+        356,
+        339
+      ]
+    }
+  ],
+  "matches": [
+    {
+      "seed": "ai-match-01",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 39,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 924,
+      "settledRounds": 39,
+      "boundarySteps": 195,
+      "restoreChecks": 4,
+      "milliseconds": 4330.074299999999,
+      "longestBoundaryMs": 62.43530000000055,
+      "longestAIRoundMs": 158.58140000000003,
+      "scores": [
+        {
+          "faction": 0,
+          "score": 429
+        },
+        {
+          "faction": 1,
+          "score": 421
+        },
+        {
+          "faction": 3,
+          "score": 387
+        },
+        {
+          "faction": 2,
+          "score": 370
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-02",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 37,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 861,
+      "settledRounds": 37,
+      "boundarySteps": 185,
+      "restoreChecks": 4,
+      "milliseconds": 4118.9292,
+      "longestBoundaryMs": 87.88230000000021,
+      "longestAIRoundMs": 202.29280000000108,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 413
+        },
+        {
+          "faction": 3,
+          "score": 392
+        },
+        {
+          "faction": 0,
+          "score": 388
+        },
+        {
+          "faction": 2,
+          "score": 366
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-03",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 38,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 903,
+      "settledRounds": 38,
+      "boundarySteps": 190,
+      "restoreChecks": 4,
+      "milliseconds": 4046.1196999999993,
+      "longestBoundaryMs": 74.9359000000004,
+      "longestAIRoundMs": 163.22810000000027,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 417
+        },
+        {
+          "faction": 0,
+          "score": 398
+        },
+        {
+          "faction": 3,
+          "score": 380
+        },
+        {
+          "faction": 2,
+          "score": 366
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-04",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 37,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 879,
+      "settledRounds": 37,
+      "boundarySteps": 185,
+      "restoreChecks": 4,
+      "milliseconds": 3922.548700000001,
+      "longestBoundaryMs": 65.4939000000013,
+      "longestAIRoundMs": 129.94070000000102,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 413
+        },
+        {
+          "faction": 0,
+          "score": 395
+        },
+        {
+          "faction": 3,
+          "score": 372
+        },
+        {
+          "faction": 2,
+          "score": 367
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-05",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 38,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 898,
+      "settledRounds": 38,
+      "boundarySteps": 190,
+      "restoreChecks": 4,
+      "milliseconds": 3933.9791000000005,
+      "longestBoundaryMs": 56.373999999999796,
+      "longestAIRoundMs": 122.9519999999975,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 411
+        },
+        {
+          "faction": 0,
+          "score": 403
+        },
+        {
+          "faction": 3,
+          "score": 390
+        },
+        {
+          "faction": 2,
+          "score": 364
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-06",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 38,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 879,
+      "settledRounds": 38,
+      "boundarySteps": 190,
+      "restoreChecks": 4,
+      "milliseconds": 3928.9020999999993,
+      "longestBoundaryMs": 60.727100000000064,
+      "longestAIRoundMs": 130.56569999999556,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 420
+        },
+        {
+          "faction": 0,
+          "score": 404
+        },
+        {
+          "faction": 3,
+          "score": 380
+        },
+        {
+          "faction": 2,
+          "score": 364
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-07",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 39,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 890,
+      "settledRounds": 39,
+      "boundarySteps": 195,
+      "restoreChecks": 4,
+      "milliseconds": 3864.9311000000016,
+      "longestBoundaryMs": 52.597900000000664,
+      "longestAIRoundMs": 145.58359999999448,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 446
+        },
+        {
+          "faction": 0,
+          "score": 412
+        },
+        {
+          "faction": 2,
+          "score": 393
+        },
+        {
+          "faction": 3,
+          "score": 386
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-08",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 38,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 888,
+      "settledRounds": 38,
+      "boundarySteps": 190,
+      "restoreChecks": 4,
+      "milliseconds": 3960.7831000000006,
+      "longestBoundaryMs": 59.78009999999995,
+      "longestAIRoundMs": 134.5453000000016,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 414
+        },
+        {
+          "faction": 0,
+          "score": 407
+        },
+        {
+          "faction": 3,
+          "score": 386
+        },
+        {
+          "faction": 2,
+          "score": 356
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-09",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 39,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 906,
+      "settledRounds": 39,
+      "boundarySteps": 195,
+      "restoreChecks": 4,
+      "milliseconds": 3999.5985999999975,
+      "longestBoundaryMs": 55.308499999999185,
+      "longestAIRoundMs": 136.18360000000393,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 428
+        },
+        {
+          "faction": 0,
+          "score": 418
+        },
+        {
+          "faction": 3,
+          "score": 398
+        },
+        {
+          "faction": 2,
+          "score": 372
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-10",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 38,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 878,
+      "settledRounds": 38,
+      "boundarySteps": 190,
+      "restoreChecks": 4,
+      "milliseconds": 3896.4730999999956,
+      "longestBoundaryMs": 58.619000000006054,
+      "longestAIRoundMs": 136.4890000000014,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 420
+        },
+        {
+          "faction": 0,
+          "score": 405
+        },
+        {
+          "faction": 3,
+          "score": 380
+        },
+        {
+          "faction": 2,
+          "score": 374
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-11",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 38,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 894,
+      "settledRounds": 38,
+      "boundarySteps": 190,
+      "restoreChecks": 4,
+      "milliseconds": 3873.3157999999967,
+      "longestBoundaryMs": 62.75880000000325,
+      "longestAIRoundMs": 148.81579999999667,
+      "scores": [
+        {
+          "faction": 0,
+          "score": 409
+        },
+        {
+          "faction": 1,
+          "score": 404
+        },
+        {
+          "faction": 3,
+          "score": 378
+        },
+        {
+          "faction": 2,
+          "score": 368
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-12",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 37,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 875,
+      "settledRounds": 37,
+      "boundarySteps": 185,
+      "restoreChecks": 4,
+      "milliseconds": 3971.2762999999977,
+      "longestBoundaryMs": 66.09320000000298,
+      "longestAIRoundMs": 132.79379999999946,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 417
+        },
+        {
+          "faction": 0,
+          "score": 397
+        },
+        {
+          "faction": 3,
+          "score": 374
+        },
+        {
+          "faction": 2,
+          "score": 359
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-13",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 38,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 893,
+      "settledRounds": 38,
+      "boundarySteps": 190,
+      "restoreChecks": 4,
+      "milliseconds": 4033.053500000002,
+      "longestBoundaryMs": 60.06739999999991,
+      "longestAIRoundMs": 133.3078999999998,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 425
+        },
+        {
+          "faction": 0,
+          "score": 416
+        },
+        {
+          "faction": 3,
+          "score": 384
+        },
+        {
+          "faction": 2,
+          "score": 373
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-14",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 37,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 866,
+      "settledRounds": 37,
+      "boundarySteps": 185,
+      "restoreChecks": 4,
+      "milliseconds": 3786.813699999999,
+      "longestBoundaryMs": 62.56839999999647,
+      "longestAIRoundMs": 151.08080000000336,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 407
+        },
+        {
+          "faction": 0,
+          "score": 405
+        },
+        {
+          "faction": 3,
+          "score": 382
+        },
+        {
+          "faction": 2,
+          "score": 364
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-15",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 38,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 868,
+      "settledRounds": 38,
+      "boundarySteps": 190,
+      "restoreChecks": 4,
+      "milliseconds": 3774.6237000000037,
+      "longestBoundaryMs": 47.19860000000335,
+      "longestAIRoundMs": 113.01149999998597,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 428
+        },
+        {
+          "faction": 0,
+          "score": 401
+        },
+        {
+          "faction": 3,
+          "score": 386
+        },
+        {
+          "faction": 2,
+          "score": 353
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-16",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 38,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 902,
+      "settledRounds": 38,
+      "boundarySteps": 190,
+      "restoreChecks": 4,
+      "milliseconds": 4117.087600000006,
+      "longestBoundaryMs": 75.199099999998,
+      "longestAIRoundMs": 212.14390000001004,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 420
+        },
+        {
+          "faction": 0,
+          "score": 410
+        },
+        {
+          "faction": 3,
+          "score": 389
+        },
+        {
+          "faction": 2,
+          "score": 366
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-17",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 37,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 882,
+      "settledRounds": 37,
+      "boundarySteps": 185,
+      "restoreChecks": 4,
+      "milliseconds": 3919.8701,
+      "longestBoundaryMs": 54.447999999989406,
+      "longestAIRoundMs": 145.16800000000512,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 411
+        },
+        {
+          "faction": 0,
+          "score": 403
+        },
+        {
+          "faction": 3,
+          "score": 377
+        },
+        {
+          "faction": 2,
+          "score": 358
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-18",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 38,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 893,
+      "settledRounds": 38,
+      "boundarySteps": 190,
+      "restoreChecks": 4,
+      "milliseconds": 3743.1143999999913,
+      "longestBoundaryMs": 56.14989999998943,
+      "longestAIRoundMs": 134.873299999992,
+      "scores": [
+        {
+          "faction": 0,
+          "score": 409
+        },
+        {
+          "faction": 1,
+          "score": 409
+        },
+        {
+          "faction": 3,
+          "score": 384
+        },
+        {
+          "faction": 2,
+          "score": 377
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-19",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 37,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 875,
+      "settledRounds": 37,
+      "boundarySteps": 185,
+      "restoreChecks": 4,
+      "milliseconds": 3872.0919999999896,
+      "longestBoundaryMs": 64.31900000000314,
+      "longestAIRoundMs": 144.1067000000039,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 424
+        },
+        {
+          "faction": 0,
+          "score": 403
+        },
+        {
+          "faction": 3,
+          "score": 382
+        },
+        {
+          "faction": 2,
+          "score": 359
+        }
+      ],
+      "issues": []
+    },
+    {
+      "seed": "ai-match-20",
+      "valid": true,
+      "victory": "science",
+      "winner": 1,
+      "round": 37,
+      "totalCities": 12,
+      "founded": 12,
+      "technologies": [
+        {
+          "faction": 0,
+          "count": 12
+        },
+        {
+          "faction": 1,
+          "count": 12
+        },
+        {
+          "faction": 2,
+          "count": 12
+        },
+        {
+          "faction": 3,
+          "count": 12
+        }
+      ],
+      "combatNotifications": 0,
+      "kills": 0,
+      "captures": 0,
+      "commands": 870,
+      "settledRounds": 37,
+      "boundarySteps": 185,
+      "restoreChecks": 4,
+      "milliseconds": 3702.409599999999,
+      "longestBoundaryMs": 60.094900000010966,
+      "longestAIRoundMs": 130.39700000001176,
+      "scores": [
+        {
+          "faction": 1,
+          "score": 419
+        },
+        {
+          "faction": 0,
+          "score": 402
+        },
+        {
+          "faction": 3,
+          "score": 380
+        },
+        {
+          "faction": 2,
+          "score": 351
+        }
+      ],
+      "issues": []
+    }
+  ],
+  "errors": []
+}

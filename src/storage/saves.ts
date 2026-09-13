@@ -137,12 +137,19 @@ export function validateSave(input: unknown): GameState {
     const memory = object(f.memory, '타일 기억'); if (Object.keys(memory).length > size) fail('타일 기억 크기');
     for (const [k, v] of Object.entries(memory)) { const t = validateTile(v); if (String(t.id) !== k || !explored.includes(t.id)) fail('타일 기억 참조'); }
     const cityMemory = object(f.cityMemory, '도시 기억'); if (Object.keys(cityMemory).length > 200) fail('도시 기억 크기');
-    for (const [k, v] of Object.entries(cityMemory)) { validateObservedCity(v); if (object(v, '도시 기억').id !== k) fail('도시 기억 식별자'); }
+    for (const [k, v] of Object.entries(cityMemory)) {
+      validateObservedCity(v); const rememberedCity = object(v, '도시 기억');
+      if (rememberedCity.id !== k) fail('도시 기억 식별자');
+      if (!explored.includes(rememberedCity.tile) || !Object.hasOwn(memory, String(rememberedCity.tile))) fail('탐험하지 않은 도시 기억');
+    }
     const stats = object(f.stats, '통계'); for (const k of ['founded', 'captures', 'kills', 'explored']) number(stats[k], `통계 ${k}`);
     if (stats.combats !== undefined) number(stats.combats, '전투 횟수');
     return f;
   });
   if (factions.length !== 4) fail('세력 수');
+  if ((s.phase === 'player' || s.phase === 'ai') && !factions[actor].alive) fail('탈락한 행동 세력');
+  if (s.phase === 'ai' && actor === 0) fail('AI 페이즈의 행동 세력');
+  if ((s.phase === 'player' || s.phase === 'ai') && s.lastSettledRound !== round - 1) fail('이미 정산된 행동 라운드');
   const relations = array(s.relations, '외교 관계', 6).map(v => {
     const r = object(v, '외교'); const a = number(r.a, '외교 세력', 0, 3); const b = number(r.b, '외교 상대', 0, 3); if (a >= b) fail('외교 쌍 순서');
     boolean(r.war, '전쟁'); number(r.peaceUntil, '강화 만료', 0, 200); number(r.tradeUntil, '교역 만료', 0, 200); number(r.opinion, '관계', -1000, 1000, false); return r;
@@ -195,12 +202,19 @@ export function saveGame(state: GameState, slot = 'auto'): Promise<void> {
     const db = await openDatabase();
     try {
       const tx = db.transaction('saves', 'readwrite'); const done = completed(tx); const store = tx.objectStore('saves');
-      if (slot === 'auto') {
-        const old = store.get('auto'); const older = store.get('auto-1');
-        old.onsuccess = () => { if (old.result) { try { importSave(JSON.stringify(old.result)); store.put(old.result, 'auto-1'); } catch { /* Keep the last healthy backup. */ } } };
-        older.onsuccess = () => { if (older.result) { try { importSave(JSON.stringify(older.result)); store.put(older.result, 'auto-2'); } catch { /* A corrupt backup must not overwrite a healthy one. */ } } };
+      try {
+        if (slot === 'auto') {
+          const old = store.get('auto'); const older = store.get('auto-1');
+          old.onsuccess = () => { if (old.result) { try { importSave(JSON.stringify(old.result)); store.put(old.result, 'auto-1'); } catch { /* Keep the last healthy backup. */ } } };
+          older.onsuccess = () => { if (older.result) { try { importSave(JSON.stringify(older.result)); store.put(older.result, 'auto-2'); } catch { /* A corrupt backup must not overwrite a healthy one. */ } } };
+        }
+        store.put(data, slot); await done;
+      } catch (error) {
+        // Synchronous quota/serialization errors must roll back history rotation too.
+        try { tx.abort(); } catch { /* An asynchronous storage error already aborted it. */ }
+        await done.catch(() => undefined);
+        throw error;
       }
-      store.put(data, slot); await done;
     } finally { db.close(); }
   });
   pending = write;

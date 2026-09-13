@@ -1,5 +1,5 @@
 import type { City, Command, CommandResult, GameState, Unit } from './types';
-import { BUILDINGS, ECONOMY_BALANCE, IMPROVEMENTS, POLICIES, RULES, TECHS, TERRAINS, UNITS } from '../data/balance';
+import { BUILDINGS, DIPLOMACY_LIMITS, ECONOMY_BALANCE, IMPROVEMENTS, POLICIES, RULES, TECHS, TERRAINS, UNITS } from '../data/balance';
 import { hexDistance, neighborIds } from './hex';
 import { canEnter, knownResource, notify, relation, resetFaction, updateVisibility } from '../systems/world';
 import { assignWorkers, settleEconomy } from '../systems/economy';
@@ -79,6 +79,7 @@ export function applyCommand(original: GameState, actorId: number, command: Comm
      requireRule(other.id === 0 || other.personality !== 'military' || observedThreat >= ownForce / 2 || state.round > 35 || rel.opinion > -25, 'REJECTED', '상대가 아직 강화 제안을 받아들이지 않았습니다.'); rel.war = false; rel.peaceUntil = state.round + RULES.peaceDuration; rel.opinion += 10; expelTrespassers(state, actorId, other.id); notify(state, actorId, `${other.name}과 강화: ${rel.peaceUntil}라운드까지 평화 보장`, 'diplomacy'); notify(state, other.id, `${f.name}과 강화 협정`, 'diplomacy');
     } else if (command.type === 'TRADE_AGREEMENT') { requireRule(!rel.war && rel.tradeUntil <= state.round, 'TRADE_ACTIVE', '전쟁 중이거나 기존 교역 협정이 유효합니다.'); requireRule(rel.opinion >= -10, 'REJECTED', '관계가 나빠 교역을 거절했습니다.'); rel.tradeUntil = state.round + RULES.tradeDuration; rel.opinion += 5; notify(state, actorId, `${other.name}과 12라운드 교역: 양측 금 +3/라운드`, 'diplomacy'); }
     else { requireRule(!rel.war && Number.isSafeInteger(command.give) && Number.isSafeInteger(command.receive) && command.give >= 0 && command.receive >= 0 && command.give + command.receive > 0, 'TRADE_AMOUNT', '평화 중 0 이상의 정수 금액을 거래하세요.'); requireRule(f.gold >= command.give && other.gold >= command.receive, 'BALANCE', '양측 중 한 세력의 보유 금이 부족합니다.'); requireRule(command.give >= command.receive, 'REJECTED', '상대는 이익이 없는 금 요구를 거절했습니다.'); f.gold += command.receive - command.give; other.gold += command.give - command.receive; rel.opinion += Math.min(20, Math.floor((command.give - command.receive) / 5)); }
+    rel.opinion = Math.max(DIPLOMACY_LIMITS.opinionMin, Math.min(DIPLOMACY_LIMITS.opinionMax, rel.opinion));
     break;
    }
    case 'END_TURN': nextActor(state); break;

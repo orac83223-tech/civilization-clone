@@ -1,0 +1,13 @@
+{
+  "runId": 34769049649,
+  "commit": "86656c50bc788edbe884ae330d9e20e6e82ec757",
+  "conclusion": "success",
+  "url": "https://github.com/orac83223-tech/civilization-clone/actions/runs/34769049649",
+  "evidence": [
+    "2026-09-13T16:36:11.2618281Z \u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m11 passed\u001b[39m\u001b[22m\u001b[90m (11)\u001b[39m",
+    "2026-09-13T16:36:11.2619658Z \u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m142 passed\u001b[39m\u001b[22m\u001b[90m (142)\u001b[39m",
+    "2026-09-13T16:37:34.4013978Z Wrote artifacts/simulation-results.json; maps 50/50; matches 20/20; errors 0",
+    "2026-09-13T16:38:38.9044412Z Running 15 tests using 1 worker",
+    "2026-09-13T16:40:16.6403661Z   15 passed (1.7m)"
+  ]
+}
