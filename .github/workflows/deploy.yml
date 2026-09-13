@@ -10,14 +10,21 @@ jobs:
   build:
     if: github.ref == 'refs/heads/main' && vars.ENABLE_PAGES_DEPLOY == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
-      - run: npm ci && npm run check && npm run build
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run simulate
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run test:e2e
+      - run: npm run test:subpath
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
   deploy:

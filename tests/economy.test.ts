@@ -1,0 +1,187 @@
+import { describe, expect, it } from 'vitest';
+import { applyCommand, getCityYields, updateVisibility } from '../src/game';
+import { neighborIds } from '../src/game/core/hex';
+import { BUILDINGS, RULES, TECHS, UNITS } from '../src/game/data/balance';
+import { assignWorkers, factionIncome, growthCost, productionKey, settleEconomy } from '../src/game/systems/economy';
+import { addUnit, capitals, command } from './support/fixtures';
+
+describe('city economy and production', () => {
+  it('works its center automatically and limits additional labor to population without duplicates', () => {
+    const state = capitals();
+    const city = state.cities.find(candidate => candidate.owner === 0)!;
+    city.population = 3;
+    assignWorkers(state);
+    expect(city.workedTiles).toHaveLength(3);
+    expect(city.workedTiles).not.toContain(city.tile);
+    const report = getCityYields(state, city.id);
+    expect(report.breakdown.some(part => part.label === '도시 중심')).toBe(true);
+    expect(report.gross.food - city.population * 2).toBe(report.netFood);
+    const all = state.cities.flatMap(candidate => candidate.workedTiles);
+    expect(new Set(all).size).toBe(all.length);
+  });
+  it('resolves competing tile locks deterministically between adjacent same-owner cities', () => {
+    const state = capitals();
+    const first = state.cities[0]!;
+    const second = state.cities[1]!;
+    state.tiles[second.tile]!.cityId = null;
+    second.owner = first.owner;
+    second.tile = first.tile + 3;
+    state.tiles[second.tile]!.owner = first.owner;
+    state.tiles[second.tile]!.cityId = second.id;
+    const shared = first.tile + 2;
+    state.tiles[shared]!.owner = first.owner;
+    first.lockedTiles = [shared]; second.lockedTiles = [shared];
+    assignWorkers(state);
+    expect(state.cities.filter(city => city.workedTiles.includes(shared))).toHaveLength(1);
+    const before = state.cities.map(city => city.workedTiles);
+    assignWorkers(state);
+    expect(state.cities.map(city => city.workedTiles)).toEqual(before);
+  });
+  it('carries food overflow into the next population threshold', () => {
+    const state = capitals();
+    const city = state.cities[0]!;
+    city.food = growthCost(city.population) - 1;
+    assignWorkers(state);
+    const surplus = getCityYields(state, city).netFood;
+    const population = city.population;
+    expect(surplus).toBeGreaterThan(1);
+    settleEconomy(state);
+    expect(city.population).toBe(population + 1);
+    expect(city.food).toBe(surplus - 1);
+  });
+  it('reduces population on starvation, floors food at zero, and never removes its last citizen', () => {
+    const state = capitals();
+    const city = state.cities[2]!;
+    for (const tile of state.tiles) if (tile.owner === city.owner) tile.terrain = 'desert';
+    city.population = 6; city.food = 0;
+    settleEconomy(state);
+    expect(city.population).toBe(5);
+    expect(city.food).toBe(0);
+    city.population = 1; city.resistance = 3; city.food = 0;
+    settleEconomy(state);
+    expect(city.population).toBe(1);
+    expect(city.food).toBe(0);
+  });
+  it('charges maintenance once, prevents debt and disbands at most one unit per settlement', () => {
+    const state = capitals();
+    const owner = 0;
+    const city = state.cities[0]!;
+    for (const type of ['academy', 'market', 'workshop', 'library'] as const) city.buildings.push(type);
+    const available = state.tiles.filter(tile => tile.owner === 0 && !state.units.some(unit => unit.tile === tile.id));
+    for (const tile of available.slice(0, 4)) addUnit(state, owner, 'cavalry', tile.id);
+    state.factions[owner]!.gold = 0;
+    const units = state.units.filter(unit => unit.owner === owner).length;
+    expect(factionIncome(state, owner).gold).toBeLessThan(0);
+    settleEconomy(state);
+    expect(state.factions[owner]!.gold).toBe(0);
+    expect(state.units.filter(unit => unit.owner === owner)).toHaveLength(units - 1);
+  });
+  it('preserves production progress when switching and carries excess production', () => {
+    let state = capitals();
+    const cityId = state.cities[0]!.id;
+    state = command(state, { type: 'QUEUE_PRODUCTION', cityId, item: { kind: 'unit', id: 'warrior' } });
+    state.cities[0]!.progress['unit:warrior'] = 7;
+    state = command(state, { type: 'QUEUE_PRODUCTION', cityId, item: { kind: 'building', id: 'monument' }, replace: true });
+    expect(state.cities[0]!.progress['unit:warrior']).toBe(7);
+    state.cities[0]!.progress['building:monument'] = BUILDINGS.monument.cost - 1;
+    const production = getCityYields(state, cityId).gross.production;
+    settleEconomy(state);
+    expect(state.cities[0]!.buildings).toContain('monument');
+    expect(state.cities[0]!.progress._overflow).toBe(production - 1);
+    expect(state.cities[0]!.queue).toHaveLength(0);
+    expect(applyCommand(state, 0, { type: 'QUEUE_PRODUCTION', cityId, item: { kind: 'building', id: 'monument' } }).ok).toBe(false);
+  });
+  it('holds completed units while every legal spawn is blocked and produces exactly once after space opens', () => {
+    let state = capitals();
+    const city = state.cities[0]!;
+    state.units = state.units.filter(unit => unit.owner !== 0);
+    const destinations = [city.tile, ...neighborIds(state.tiles[city.tile]!, 24, 18)];
+    destinations.forEach(tile => addUnit(state, 0, 'warrior', tile));
+    state.factions[0]!.gold = 1000;
+    state = command(state, { type: 'QUEUE_PRODUCTION', cityId: city.id, item: { kind: 'unit', id: 'warrior' } });
+    state.cities[0]!.progress['unit:warrior'] = UNITS.warrior.cost;
+    const count = state.units.length;
+    settleEconomy(state); settleEconomy(state);
+    expect(state.units).toHaveLength(count);
+    expect(state.cities[0]!.queue).toHaveLength(1);
+    state.units = state.units.filter(unit => !(unit.owner === 0 && unit.tile === city.tile));
+    settleEconomy(state);
+    expect(state.units).toHaveLength(count);
+    expect(state.cities[0]!.queue).toHaveLength(0);
+    const produced = state.units.find(unit => unit.owner === 0 && unit.tile === city.tile)!;
+    expect(produced.moves).toBe(0);
+    expect(produced.attacked).toBe(true);
+    settleEconomy(state);
+    expect(state.units).toHaveLength(count);
+  });
+  it('spends one population when a settler completes and requires enough population', () => {
+    let state = capitals();
+    const cityId = state.cities[0]!.id;
+    state = command(state, { type: 'QUEUE_PRODUCTION', cityId, item: { kind: 'unit', id: 'settler' } });
+    const city = state.cities[0]!;
+    city.population = RULES.settlerPopulation; city.food = 0;
+    city.progress[productionKey({ kind: 'unit', id: 'settler' })] = UNITS.settler.cost;
+    settleEconomy(state);
+    expect(city.population).toBe(RULES.settlerPopulation - 1);
+    expect(state.units.some(unit => unit.owner === 0 && unit.type === 'settler')).toBe(true);
+  });
+  it('expands into unclaimed territory without taking another faction land at peace', () => {
+    const state = capitals();
+    const city = state.cities[0]!;
+    city.culture = 100;
+    const hostile = city.tile + 2;
+    state.tiles[hostile]!.owner = 1;
+    settleEconomy(state);
+    expect(state.tiles[hostile]!.owner).toBe(1);
+  });
+});
+
+describe('research and worker effects', () => {
+  it('requires prerequisites and preserves progress on research changes', () => {
+    let state = capitals();
+    expect(applyCommand(state, 0, { type: 'SET_RESEARCH', tech: 'synthesis' }).ok).toBe(false);
+    state = command(state, { type: 'SET_RESEARCH', tech: 'writing' });
+    state.factions[0]!.researchProgress.writing = 5;
+    state = command(state, { type: 'SET_RESEARCH', tech: 'agriculture' });
+    expect(state.factions[0]!.researchProgress.writing).toBe(5);
+    state = command(state, { type: 'SET_RESEARCH', tech: 'writing' });
+    state.factions[0]!.researchProgress.writing = TECHS.writing.cost - 1;
+    const science = factionIncome(state, 0).science;
+    settleEconomy(state);
+    expect(state.factions[0]!.researched).toContain('writing');
+    expect(state.factions[0]!.researchOverflow).toBe(science - 1);
+    state = command(state, { type: 'SET_RESEARCH', tech: 'agriculture' });
+    settleEconomy(state);
+    expect(state.factions[0]!.researchProgress.agriculture).toBe(science * 2 - 1);
+  });
+  it('gives every technology an effect through an unlock or measured rule bonus', () => {
+    const all = Object.keys(TECHS);
+    expect(all).toHaveLength(12);
+    expect(new Set(Object.values(TECHS).map(tech => tech.era))).toEqual(new Set([1, 2, 3]));
+    const visit = (id: keyof typeof TECHS, ancestors: Set<string>): void => {
+      expect(ancestors.has(id)).toBe(false);
+      for (const prerequisite of TECHS[id].prerequisites) visit(prerequisite, new Set([...ancestors, id]));
+    };
+    for (const id of all as (keyof typeof TECHS)[]) visit(id, new Set());
+    const state = capitals();
+    const before = getCityYields(state, state.cities[0]!);
+    state.factions[0]!.researched.push('engineering', 'astronomy', 'synthesis');
+    const after = getCityYields(state, state.cities[0]!);
+    expect(after.gross.production).toBe(before.gross.production + 1);
+    expect(after.gross.science).toBe(before.gross.science + 5);
+  });
+  it('uses a worker charge once and rejects duplicate improvements', () => {
+    let state = capitals();
+    state.factions[0]!.researched.push('agriculture');
+    const tile = state.tiles.find(candidate => candidate.owner === 0 && candidate.cityId === null && !state.units.some(unit => unit.tile === candidate.id))!;
+    tile.terrain = 'plains';
+    const worker = addUnit(state, 0, 'worker', tile.id);
+    updateVisibility(state);
+    state = command(state, { type: 'IMPROVE', unitId: worker.id, improvement: 'farm' });
+    expect(state.tiles[tile.id]!.improvement).toBe('farm');
+    expect(state.units.find(unit => unit.id === worker.id)!.charges).toBe(2);
+    const before = structuredClone(state);
+    expect(applyCommand(state, 0, { type: 'IMPROVE', unitId: worker.id, improvement: 'farm' }).ok).toBe(false);
+    expect(state).toEqual(before);
+  });
+});

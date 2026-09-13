@@ -1,14 +1,9 @@
 {
-  "name": "Civilization web",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
-  "forwardPorts": [
-    5173
-  ],
-  "portsAttributes": {
-    "5173": {
-      "label": "Game preview",
-      "onAutoForward": "notify"
-    }
-  },
-  "postCreateCommand": "npm ci"
+  "name": "Hex Empires — Node 24",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bookworm",
+  "forwardPorts": [5173, 4173],
+  "portsAttributes": { "5173": { "label": "Game development", "onAutoForward": "notify" }, "4173": { "label": "Production preview" } },
+  "postCreateCommand": "npm ci",
+  "remoteUser": "node",
+  "customizations": { "vscode": { "extensions": ["dbaeumer.vscode-eslint"] } }
 }
