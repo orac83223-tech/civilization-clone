@@ -1,0 +1,29 @@
+{
+  "measuredAt": "2026-09-13T16:46:05.265Z",
+  "methodology": "All dist files separately gzip compressed; includes notices and HTML. Transfer depends on host compression.",
+  "files": [
+    {
+      "file": "assets/index-BgtdXMqH.js",
+      "bytes": 341121,
+      "gzipBytes": 107488
+    },
+    {
+      "file": "assets/index-CM3OjYDn.css",
+      "bytes": 51036,
+      "gzipBytes": 11980
+    },
+    {
+      "file": "index.html",
+      "bytes": 1020,
+      "gzipBytes": 691
+    },
+    {
+      "file": "THIRD_PARTY_NOTICES.txt",
+      "bytes": 2112,
+      "gzipBytes": 1375
+    }
+  ],
+  "bytes": 395289,
+  "gzipBytes": 121534,
+  "budgetBytes": 5242880
+}

@@ -1,0 +1,29 @@
+{
+  "measuredAt": "2026-09-13T16:46:54.612Z",
+  "environment": "win32 / 152.0.7977.84",
+  "basePath": "/civilization-clone/",
+  "http": 200,
+  "newGame": true,
+  "foundedCity": true,
+  "savedReload": true,
+  "assets": [
+    {
+      "url": "/civilization-clone/assets/index-CM3OjYDn.css",
+      "status": 200
+    },
+    {
+      "url": "/civilization-clone/assets/index-BgtdXMqH.js",
+      "status": 200
+    },
+    {
+      "url": "/civilization-clone/assets/index-CM3OjYDn.css",
+      "status": 200
+    },
+    {
+      "url": "/civilization-clone/assets/index-BgtdXMqH.js",
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "note": "Local production artifact under a project subpath; this is not a deployed public URL."
+}
